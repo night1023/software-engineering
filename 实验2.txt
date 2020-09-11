@@ -1,0 +1,51 @@
+package hello;
+import java.util.Scanner;
+import javax.swing.*;
+import java.util.*;
+import java.text.*;
+import java.awt.Graphics;
+import java.awt.TextField;
+import java.io.*;
+
+	
+public class Demo
+{
+		public static void main(String[] args) throws IOException   {
+		File f=new File("D:\\qq\\564680007\\FileRecv\\yq_in.txt");
+		BufferedReader r=new BufferedReader(new FileReader(f));
+		String[] line =new String[200];
+		int n=0;
+		while ((line[n]=r.readLine()) != null ) {
+				n++;
+			}
+		String[] result =new String[200];
+		int loc =line[0].indexOf('省')+1;
+		result[0]=line[0].substring(0, loc);
+		int num=0;
+		int num1=1;
+		for(int i=0;line[i]!=null;i++) {
+			int loc1=line[i].indexOf('省')+1;
+			if(result[num].equals(line[i].substring(0, loc1))) {
+				if(line[i].indexOf('区') ==-1	) {
+				result[num1]=line[i].substring(loc1+1);
+				num1++;
+				}
+			}
+			else {
+				result[i+1]=line[i].substring(0, loc1);
+				num1++;
+				result[num1]=line[i].substring(loc1+1);
+				num=i+1;
+				num1++;
+			}
+		}
+		FileOutputStream fout=new FileOutputStream(new File("C:\\Users\\so young\\Desktop\\yq_out1.txt"));
+		PrintStream p=new PrintStream(fout);
+		for(int i=0;i<n;i++) {
+			if(result[i]!=null) {
+				p.println(result[i]);
+				System.out.println(result[i]);
+			}
+		}
+	}
+}
