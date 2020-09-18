@@ -1,0 +1,98 @@
+package Text;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Scanner;
+
+
+public class text  {
+    public static void main(String[] args) {
+		Scanner in =new Scanner (System.in);
+    	String[] str =new String[200];
+    	System.out.println("0. finish");
+    	System.out.println("1. add");
+    	System.out.println("2. delet");
+    	System.out.println("3. alter");
+    	System.out.println("4. find");
+    	int a;
+    	a=1;
+    	int n=0;
+    	while(a!=0) {
+    		a=in.nextInt();
+    	switch(a) {
+    		case 1 :
+    			add a1=new add();
+    			str[n]=a1.Add();
+    			System.out.println((n+1)+"."+str[n]);
+    			n++;
+    			break;
+    		case 2 :
+    			delet d1=new delet();
+    			str=d1.Delet(str, n);
+    			for(int i=0;i<n-1;i++) {
+    				System.out.println(str[i]);
+    			}
+    			n--;
+    			break;
+    		case 3:
+    			alter al1=new alter();
+    			str=al1.Alter(str, n);
+    			for(int i=0;i<n;i++) {
+    				System.out.println(str[i]);
+    			}
+    			break;
+    		case 4:
+    			find f1=new find();
+    			System.out.println(str[f1.Find()]);
+    			break;
+    	   }
+    	}
+		
+	}
+}
+class add{
+	public String Add() {
+		Scanner in =new Scanner (System.in);
+		System.out.println("输入增加内容");
+		String str=in.next();
+		return str;
+	}
+}
+class delet {
+	Scanner in =new Scanner(System.in);
+	String[] str ;
+	public String[] Delet(String str[],int n) {
+		this.str=str;
+		System.out.println("输入删减序号");
+		int x=in.nextInt();
+		for(int i=x-1;i<=n;i++) {
+			str[i]=str[i+1];
+		}
+		return str;
+	}
+}
+
+class alter {
+	Scanner in =new Scanner(System.in);
+	String[] str1;
+	public String[] Alter(String[] str,int n) {
+		this.str1=str;
+		System.out.println("修改序号");
+		int x=in.nextInt();
+		System.out.println("输入修改内容");
+		String str2=in.next();
+		str1[x-1]=str2;
+		return str1;
+	}
+	
+}
+
+class find {
+	Scanner in =new Scanner(System.in);
+    public int Find() {
+    	System.out.println("查找序号");
+    	int x=in.nextInt();
+    	return x-1;
+    }
+}
